@@ -1,10 +1,11 @@
 {
   "name": "node-demo",
   "version": "1.0.0",
-  "description": "",
+  "description": "Training purpose",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "mocha test/test.js"
   },
   "repository": {
     "type": "git",
