@@ -9,9 +9,9 @@ services:
       - jenkins_home:/var/jenkins_home
 
   node_app:
-    build: /app #node_app is in app folder inside container
+    build: ./ #node_app is in app folder inside container
     ports:
-      - '3001:3001'
+      - '3000:3001'
 
 volumes:
   jenkins_home:
