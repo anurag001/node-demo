@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+    
+    environment {
+        DOCKER_IMAGE = '415664074daf3343a65554ae9f61a516bcf75062bb919c7d515dba25d5b79208'
+        CODE_DIR = '/app'
+        CONTAINER_PORT = '8800'
+        HOST_PORT = '8080'
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/anurag001/node-demo.git'
+            }
+        }
+        
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build(env.DOCKER_IMAGE)
+                }
+            }
+        }
+        
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    docker.image(env.DOCKER_IMAGE).run('-v ${pwd()}:${CODE_DIR} -p ${HOST_PORT}:${CONTAINER_PORT}')
+                }
+            }
+        }
+    }
+}
