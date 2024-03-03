@@ -11,10 +11,8 @@ pipeline {
 
         stage('Test') {
             steps {
-                script {
-                    dir('/app') {
-                      echo 'Node';
-                      sh 'npm install'
+                nodejs(nodeJSInstallationName: 'nodejs') {
+                    sh 'npm install'
                 }
             }
         }
@@ -23,7 +21,6 @@ pipeline {
             steps {
                 script {
                     dir('/app') {
-                        echo 'Docker';
                         sh 'docker build -t anuragwebshark/node-demo'
                         sh 'docker run anuragwebshark/node-demo'
                     }
