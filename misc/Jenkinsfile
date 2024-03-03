@@ -6,6 +6,7 @@ pipeline {
             steps {
                 checkout scm
                 sh "git rev-parse --short HEAD > .git/commit-id"
+                sh 'chmod -R 755 /app'
             }
         }
 
