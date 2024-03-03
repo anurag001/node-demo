@@ -21,7 +21,7 @@ node {
             steps {
                 script {
                     // Navigate to the directory containing your Docker Compose file
-                    dir('/') {
+                    dir('/app') {
                         // Execute docker-compose up command
                         sh 'docker-compose up -d'
                     }
