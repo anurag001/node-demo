@@ -21,7 +21,8 @@ pipeline {
             steps {
                 script {
                     dir('/app') {
-                        sh 'docker-compose up -d'
+                        sh 'docker build -t anuragwebshark/node-demo'
+                        sh 'docker run anuragwebshark/node-demo'
                     }
                 }
             }
