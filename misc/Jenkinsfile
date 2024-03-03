@@ -1,28 +1,26 @@
-node {
-   agent any
-  //  def commit_id
-
-
-  stages {
+pipeline {
+    agent any
+    
+    stages {
         stage('Preparation') {
-          checkout scm
-          sh "git rev-parse --short HEAD > .git/commit-id"                        
-          // commit_id = readFile('.git/commit-id').trim()
+            steps {
+                checkout scm
+                sh "git rev-parse --short HEAD > .git/commit-id"
+            }
         }
 
-        stage('test') {
-          nodejs(nodeJSInstallationName: 'nodejs') {
-            sh 'npm install'
-          //    sh 'npm test'
-          }
+        stage('Test') {
+            steps {
+                nodejs(nodeJSInstallationName: 'nodejs') {
+                    sh 'npm install'
+                }
+            }
         }
-        
+
         stage('Deploy Docker Compose') {
             steps {
                 script {
-                    // Navigate to the directory containing your Docker Compose file
-                    dir('/app') {
-                        // Execute docker-compose up command
+                    dir('/path/to/docker-compose-directory') {
                         sh 'docker-compose up -d'
                     }
                 }
