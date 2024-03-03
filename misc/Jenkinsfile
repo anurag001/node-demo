@@ -20,7 +20,7 @@ pipeline {
         stage('Deploy Docker Compose') {
             steps {
                 script {
-                    dir('/path/to/docker-compose-directory') {
+                    dir('/app') {
                         sh 'docker-compose up -d'
                     }
                 }
