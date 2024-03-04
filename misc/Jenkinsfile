@@ -14,10 +14,15 @@ node {
             }
         }
 
-        stage('docker build/push') {
-            docker.withRegistry('https://index.docker.io/v2/', 'dockerhub') {
-                def app = docker.build("anuragwebshark/node-demo:${commit_id}", '.').push()
-            }
+        // stage('docker build/push') {
+        //     docker.withRegistry('https://index.docker.io/v2/', 'dockerhub') {
+        //         def app = docker.build("anuragwebshark/node-demo:${commit_id}", '.').push()
+        //     }
+        // }
+
+        stage('Restart Containers') {
+            // Restart containers using the 'latest' image
+            sh 'docker ps --filter "ancestor=anuragwebshark/node-demo:latest" -q | xargs docker restart'
         }
    }
    
