@@ -7,7 +7,7 @@ node {
         commit_id = readFile('.git/commit-id').trim()
     }
 
-    stage('test') {
+    stage('Test') {
         nodejs(nodeJSInstallationName: 'nodejs') {
             sh 'npm install'
             // sh 'npm test'
@@ -26,7 +26,23 @@ node {
 
     stage('Restart Containers') {
         // Restart containers using the 'latest' image
-        sh 'docker ps --filter "ancestor=anuragwebshark/node-demo:latest" -q | xargs docker restart'
+        // sh 'docker ps --filter "ancestor=anuragwebshark/node-demo:latest" -q | xargs docker restart'
+        script {
+                    // Define the Dockerfile path
+                    def dockerfile = './Dockerfile'
+                    
+                    // Build the Docker image
+                    def dockerImage = docker.build("anuragwebshark/node-demo", "-f ${dockerfile} .")
+                    
+                    // Run the Docker image
+                    dockerImage.inside {
+                        // Run any commands inside the Docker container
+                        sh 'echo "Hello from Docker container"'
+                    }
+                }
+
     }
+
+
    
 }
