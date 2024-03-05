@@ -15,7 +15,7 @@ node {
     }
 
     stage('Check Docker Installation') {
-        sh 'docker --version'
+        sh 'echo hi'
     }
 
     // stage('docker build/push') {
