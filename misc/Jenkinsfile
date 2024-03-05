@@ -14,7 +14,15 @@ node {
         }
     }
 
+    stage('Print Environment') {
+            steps {
+                sh 'printenv'
+            }
+    }
+
     stage('Check Docker Installation') {
+        sh 'sudo /usr/local/bin/docker --version'
+
         sh 'docker --version'
     }
 
