@@ -14,9 +14,9 @@ node {
         }
     }
 
-    stage('Print Environment') {
+    stage('Invoking') {
             steps {
-                sh 'printenv'
+                sh 'sudo /usr/local/bin/docker --version'
             }
     }
 
